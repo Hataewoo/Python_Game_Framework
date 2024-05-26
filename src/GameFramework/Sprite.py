@@ -3,8 +3,9 @@ from GameFramework import pygame, Vec2, Node, TextureMNG, Director, Renderer
 class Sprite(Node) :
 
     def __init__(self, path : str, position : Vec2 = Vec2(0, 0),
-     pivot : Vec2 = Vec2(0.5, 0.5), rotation : float = 0, layer : int = 0,
-      ui : bool = False, color : pygame.Color = pygame.Color(255, 255, 255, 255)) -> None :
+     pivot : Vec2 = Vec2(0.5, 0.5), rotation : float = 0, layer : int = 0, 
+     visible : bool = True, ui : bool = False, 
+     color : pygame.Color = pygame.Color(255, 255, 255, 255)) -> None :
         super().__init__()
         self.path = path
 
@@ -12,6 +13,7 @@ class Sprite(Node) :
         self.pivot = pivot
         self.rotation = rotation
         self.layer = layer
+        self.visible = visible
         self.color = color
 
         self.texture : pygame.Surface = None
@@ -27,10 +29,12 @@ class Sprite(Node) :
         width = int(self.texture.get_width() * self.scale.x)
         height = int(self.texture.get_height() * self.scale.y)
         draw_image = pygame.transform.scale(self.texture, (width, height))
-        
+
+        draw_image.fill(self.color, special_flags=pygame.BLEND_RGBA_MULT)
+
         self.rect = draw_image.get_rect()
-        self.rect.centerx = self.position.x - self.rect.width * self.pivot.x
-        self.rect.centery = self.position.y - self.rect.height * self.pivot.y
+        self.rect.centerx = self.position.x
+        self.rect.centery = self.position.y
         Director.screen.blit(draw_image, self.rect.topleft)
 
     def SetTexture(self, path) : 

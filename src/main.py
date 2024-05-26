@@ -1,5 +1,5 @@
 from GameFramework import Director, Renderer, Mouse, pygame, Time, Sprite
-from Scenes import MainScene
+from Scenes import StartScene
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
@@ -8,14 +8,13 @@ SCREEN_COLOR = (255, 255, 255)
 def Setup() :
     pygame.init()
     Director.SetScreenSize(SCREEN_WIDTH, SCREEN_HEIGHT)
-    Director.DirectorInit("Game Tic-Tak-Toe")
+    Director.DirectorInit("Game Tic-Tac-Toe")
     Time.clock = pygame.time.Clock()
 
-    Director.ChangeScene(MainScene)
-
-
+    Director.ChangeScene(StartScene)
 
 def Event() :
+    global running
     for event in pygame.event.get() :
         if event.type == pygame.MOUSEBUTTONDOWN :
             Mouse.n_click = 1
@@ -23,12 +22,11 @@ def Event() :
         elif event.type == pygame.MOUSEBUTTONUP :
             Mouse.n_click = 3
 
-        elif event.type == pygame.QUIT:
-            Exit()
+        if event.type == pygame.QUIT:
             running = False
+            
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
-                Exit()
                 running = False
         
 def Update() :
@@ -51,9 +49,9 @@ if __name__ == "__main__" :
     Setup()
 
     while running :
-        Event()
         Update()
         Render()
+        Event()
     
     Exit()
 
