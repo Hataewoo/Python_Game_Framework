@@ -1,0 +1,40 @@
+#from GameFramework import Singleton
+from GameFramework import Scene, Mouse, Renderer, pygame
+
+
+class Director :
+    __current_scene : Scene = None
+    screen_width = 800
+    screen_height = 600
+    screen : pygame.Surface = None
+
+    @classmethod
+    def SetScreenSize(cls, width, height) :
+        cls.screen_width = width
+        cls.screen_height = height
+
+    @classmethod
+    def DirectorInit(cls, window_name) :
+        cls.screen = pygame.display.set_mode((cls.screen_width, cls.screen_height))
+        pygame.display.set_caption(window_name)
+
+    @classmethod
+    def DirectorUpdate(cls) :
+        cur_scene = cls.__current_scene
+        if cur_scene != None :
+            cur_scene.Update()
+
+        if(Mouse.n_click == 1) : Mouse.n_click = 2
+        if(Mouse.n_click == 3) : Mouse.n_click = 0
+
+    @classmethod
+    def ChangeScene(cls, scene : Scene) :
+        cur_scene = cls.__current_scene
+
+        if cur_scene != None :
+            cur_scene.Exit()
+            Renderer.ClearNode()
+
+        cls.__current_scene = scene
+        cls.__current_scene.Setup()
+
