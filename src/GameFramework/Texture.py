@@ -8,13 +8,13 @@ class TextureMNG :
 
     @classmethod
     def TextureLoad(cls, path : str) -> pygame.Surface | None :
-        if path in texture_list :
+        if path in cls.texture_list :
             return cls.texture_list[path]
 
         if os.path.exists(path) :
             print(f"IMG LOAD : {path}")
             texture = pygame.image.load(path)
-            texture_list[path] = texture
+            cls.texture_list[path] = texture
             return texture
         else :
             print(f"IMG FAIL!!! : {path}")

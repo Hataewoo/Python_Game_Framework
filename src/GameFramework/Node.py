@@ -1,4 +1,4 @@
-from GameFramework import Renderer, Vec2, pygame
+from GameFramework import Vec2, pygame, Renderer
 from abc import ABC, abstractmethod
 
 
@@ -11,7 +11,7 @@ class Node(ABC) :
 
         self.rotation : float = 0
 
-        self.visible : bool = true
+        self.visible : bool = True
         #self.isUI : bool = false
 
         self.layer : int = 0

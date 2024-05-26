@@ -1,9 +1,9 @@
-from GameFramework import Director, Renderer, Mouse, pygame, Time
+from GameFramework import Director, Renderer, Mouse, pygame, Time, Sprite
 from Scenes import MainScene
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
-SCREEN_COLOR = (255, 45, 255)
+SCREEN_COLOR = (255, 255, 255)
 
 def Setup() :
     pygame.init()
@@ -12,6 +12,7 @@ def Setup() :
     Time.clock = pygame.time.Clock()
 
     Director.ChangeScene(MainScene)
+
 
 
 def Event() :

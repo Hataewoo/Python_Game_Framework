@@ -1,11 +1,17 @@
-from GameFramework import Scene
+from GameFramework import Vec2, Scene, Sprite
 
 class MainScene(Scene) :
-    def Setup() :
+
+    @classmethod
+    def Setup(cls) :
         print("Setup")
+        testimg = Sprite("assets/images/greenslime.png",Vec2(255,255))        
 
-    def Update() :
-        print("Update")
 
-    def Exit() :
+    @classmethod
+    def Update(cls) :
+        pass
+
+    @classmethod
+    def Exit(cls) :
         print("Exit")
