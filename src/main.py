@@ -3,6 +3,7 @@ from Scenes import MainScene
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
+SCREEN_COLOR = (255, 45, 255)
 
 def Setup() :
     pygame.init()
@@ -20,25 +21,38 @@ def Event() :
 
         elif event.type == pygame.MOUSEBUTTONUP :
             Mouse.n_click = 3
+
+        elif event.type == pygame.QUIT:
+            Exit()
+            running = False
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                Exit()
+                running = False
         
 def Update() :
     Time.frame_time_ms = Time.clock.tick(60)
+    Director.ScreenFill(SCREEN_COLOR)
     Director.DirectorUpdate()
 
 def Render() :
     Renderer.Render()
 
+    pygame.display.flip()
+
 def Exit() :
-    pass
+    Renderer.ClearNode()
+    pygame.quit()
 
 
+running = True
 if __name__ == "__main__" :
     Setup()
 
-    while True :
+    while running :
         Event()
-        Render()
         Update()
+        Render()
     
     Exit()
 

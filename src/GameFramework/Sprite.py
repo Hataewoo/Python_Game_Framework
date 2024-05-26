@@ -22,6 +22,7 @@ class Sprite(Node) :
                 img_width = texture.get_width()
                 img_height = texture.get_height()
                 self.rect = pygame.Rect(0, 0, img_width, img_height)
+                Renderer.AddRender(self)
 
 
         def Render(self) :
@@ -39,7 +40,6 @@ class Sprite(Node) :
 
         def Delete(self) :
             Renderer.DeleteRender(self)
-
 
         def GetRect(self) :
             r : pygame.Rect = None

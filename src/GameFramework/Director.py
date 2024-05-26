@@ -19,13 +19,17 @@ class Director :
         pygame.display.set_caption(window_name)
 
     @classmethod
+    def ScreenFill(cls, color) :
+        cls.screen.fill(color)
+
+    @classmethod
     def DirectorUpdate(cls) :
         cur_scene = cls.__current_scene
         if cur_scene != None :
             cur_scene.Update()
 
         if(Mouse.n_click == 1) : Mouse.n_click = 2
-        if(Mouse.n_click == 3) : Mouse.n_click = 0
+        elif(Mouse.n_click == 3) : Mouse.n_click = 0
 
     @classmethod
     def ChangeScene(cls, scene : Scene) :
